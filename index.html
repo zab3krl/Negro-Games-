@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negro Games Launcher - Pobieranie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-glow glow-left"></div>
+  <div class="bg-glow glow-right"></div>
+
+  <main class="shell">
+    <section class="hero reveal reveal-1">
+      <p class="label">Oficjalny launcher</p>
+      <h1>Negro Games<br>Launcher</h1>
+      <p class="subtitle">
+        Jedno miejsce do instalacji, aktualizacji i uruchamiania wszystkich gier Negro Games.
+      </p>
+      <div class="cta-row">
+        <button id="downloadBtn" class="download-btn" type="button" aria-label="Pobierz launcher">
+          Pobierz dla Windows
+        </button>
+        <a class="alt-link" href="#wymagania">Wymagania systemowe</a>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card-grid">
+      <article class="card reveal reveal-2">
+        <h2>Co dostajesz</h2>
+        <ul>
+          <li>Automatyczne aktualizacje gier</li>
+          <li>Synchronizacja zapisow w chmurze</li>
+          <li>Szybkie logowanie jednym kontem</li>
+        </ul>
+      </article>
+
+      <article id="wymagania" class="card reveal reveal-3">
+        <h2>Minimalne wymagania</h2>
+        <ul>
+          <li>Windows 10 lub nowszy</li>
+          <li>4 GB RAM</li>
+          <li>1.5 GB wolnego miejsca</li>
+          <li>Stale polaczenie z internetem</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

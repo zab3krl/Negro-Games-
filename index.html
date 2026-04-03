@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
@@ -6,142 +6,145 @@
   <title>Negro Games Launcher - Pobieranie</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-start: #1f232b;
-      --bg-end: #21252f;
-      --ink: #f4f5f9;
-      --muted: #7f8794;
-      --accent: #2f9bff;
-      --button: #3f495d;
-      --button-hover: #4b5670;
+      --bg-end: #222730;
+      --text: #f4f5f9;
+      --muted: #838b98;
+      --blue: #3aa0ff;
+      --btn: #3f485b;
+      --btn-hover: #4b5670;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
-      margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-family: "Manrope", sans-serif;
-      color: var(--ink);
-      background: radial-gradient(circle at 70% 42%, rgba(59, 104, 188, 0.1), transparent 38%),
-        linear-gradient(90deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      height: 100%;
     }
 
-    .bg-glow {
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 74% 45%, rgba(58, 160, 255, 0.14), transparent 36%),
+        linear-gradient(90deg, var(--bg-start), var(--bg-end));
+    }
+
+    .bg {
       position: fixed;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.13;
+      inset: 0;
       pointer-events: none;
       z-index: 0;
     }
 
-    .glow-left {
-      width: 26vw;
-      height: 26vw;
-      top: -9vw;
-      left: -8vw;
-      background: #87a9d7;
+    .bg::before,
+    .bg::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(85px);
+      opacity: 0.15;
     }
 
-    .glow-right {
-      width: 38vw;
-      height: 38vw;
-      right: -12vw;
-      bottom: -15vw;
-      background: #2f9bff;
+    .bg::before {
+      width: 340px;
+      height: 340px;
+      left: -90px;
+      top: -90px;
+      background: #7fa8dc;
     }
 
-    .topbar {
+    .bg::after {
+      width: 520px;
+      height: 520px;
+      right: -170px;
+      bottom: -190px;
+      background: #318fff;
+    }
+
+    .home {
       position: fixed;
       top: 10px;
       left: 14px;
-      z-index: 4;
-    }
-
-    .home-icon {
-      color: #f3f5f7;
+      color: #e9edf5;
       text-decoration: none;
       font-size: 12px;
-      opacity: 0.92;
+      z-index: 2;
     }
 
-    .shell {
+    .layout {
       position: relative;
       z-index: 1;
-      min-height: 100vh;
+      min-height: 100%;
       width: min(980px, 92vw);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(320px, 1fr) 290px;
+      grid-template-columns: minmax(320px, 1fr) 285px;
       align-items: center;
-      justify-content: center;
-      gap: clamp(2rem, 6vw, 8rem);
+      gap: clamp(2rem, 6vw, 7rem);
     }
 
-    .hero {
-      max-width: 420px;
-    }
-
-    h1 {
+    .left h1 {
       margin: 0;
-      font-weight: 800;
-      font-size: clamp(2.1rem, 4.1vw, 3.15rem);
+      font-size: clamp(2.1rem, 4.2vw, 3.2rem);
       line-height: 1;
       letter-spacing: 0.01em;
+      font-weight: 800;
     }
 
-    .subtitle {
-      margin: 0.7rem 0 1.5rem;
-      font-size: 1.01rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+    .left p {
+      margin: 0.9rem 0 1.5rem;
       color: var(--muted);
+      letter-spacing: 0.08em;
+      font-size: 0.98rem;
+      font-weight: 700;
     }
 
-    .download-btn {
+    .btn {
       border: 0;
       border-radius: 10px;
-      background: var(--button);
-      color: #eef2f8;
+      background: var(--btn);
+      color: #f0f3f9;
       padding: 0.72rem 1.5rem;
-      font-size: 1.04rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
-    .download-btn:hover {
-      background: var(--button-hover);
+    .btn:hover {
+      background: var(--btn-hover);
       transform: translateY(-1px);
     }
 
-    .download-btn:disabled {
-      cursor: not-allowed;
+    .btn:disabled {
       opacity: 0.9;
+      cursor: not-allowed;
     }
 
     .status {
-      margin: 0.85rem 0 0;
-      min-height: 1.4rem;
-      color: #cdd8e8;
-      font-size: 0.91rem;
+      min-height: 1.3rem;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: #c9d6ea;
     }
 
-    .showcase {
+    .right {
       justify-self: end;
     }
 
-    .screen-art {
-      width: min(290px, 72vw);
-      aspect-ratio: 0.48;
-      border: 2px solid var(--accent);
-      border-radius: 7px;
-      box-shadow: 0 0 22px rgba(47, 155, 255, 0.4), inset 0 0 24px rgba(61, 141, 255, 0.22);
+    .art {
+      width: min(285px, 70vw);
+      aspect-ratio: 0.47;
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      box-shadow: 0 0 26px rgba(58, 160, 255, 0.42), inset 0 0 22px rgba(74, 142, 241, 0.2);
       background:
         radial-gradient(120% 65% at 56% 36%, rgba(232, 239, 255, 0.76) 0%, rgba(162, 185, 226, 0.42) 30%, transparent 60%),
         radial-gradient(96% 58% at 40% 52%, rgba(78, 149, 245, 0.72) 0%, rgba(65, 127, 216, 0.63) 52%, transparent 70%),
@@ -149,71 +152,35 @@
         linear-gradient(180deg, rgba(233, 239, 249, 0.72) 0%, rgba(57, 111, 197, 0.92) 72%, rgba(49, 103, 189, 0.98) 100%);
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(12px);
-      animation: rise 0.7s cubic-bezier(0.25, 0.9, 0.3, 1) forwards;
-    }
-
-    .reveal-1 {
-      animation-delay: 0.12s;
-    }
-
-    .reveal-2 {
-      animation-delay: 0.24s;
-    }
-
-    @keyframes rise {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     @media (max-width: 900px) {
-      .shell {
-        width: min(620px, 92vw);
+      .layout {
+        width: min(640px, 92vw);
         grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 5rem 0 3rem;
-        justify-items: center;
         text-align: center;
+        justify-items: center;
+        padding: 5rem 0 3rem;
       }
 
-      .showcase {
+      .right {
         justify-self: center;
-      }
-
-      .hero {
-        max-width: 560px;
-      }
-
-      .subtitle {
-        letter-spacing: 0.06em;
       }
     }
   </style>
 </head>
 <body>
-  <div class="bg-glow glow-left"></div>
-  <div class="bg-glow glow-right"></div>
+  <div class="bg"></div>
+  <a href="#" class="home" aria-label="Strona glowna">⌂</a>
 
-  <header class="topbar">
-    <a href="#" class="home-icon" aria-label="Strona glowna">⌂</a>
-  </header>
-
-  <main class="shell">
-    <section class="hero reveal reveal-1">
+  <main class="layout">
+    <section class="left">
       <h1>ZAINSTALUJ NOWY<br>HOMELESS LAUNCHER</h1>
-      <p class="subtitle">WSZYSTKIE GRY W JEDNYM MIEJSCU</p>
-      <button id="downloadBtn" class="download-btn" type="button" aria-label="Pobierz launcher">
-        pobierz na Windows
-      </button>
-      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <p>WSZYSTKIE GRY W JEDNYM MIEJSCU</p>
+      <button id="downloadBtn" class="btn" type="button">pobierz na Windows</button>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
     </section>
 
-    <section class="showcase reveal reveal-2" aria-hidden="true">
-      <div class="screen-art"></div>
+    <section class="right" aria-hidden="true">
+      <div class="art"></div>
     </section>
   </main>
 
@@ -223,9 +190,9 @@
 
     const launcherUrl = "downloads/NegroGamesLauncherSetup.exe";
     let cooldown = 0;
-    let timer = null;
+    let timerId = null;
 
-    function updateButtonText() {
+    function setButton() {
       if (cooldown > 0) {
         downloadBtn.textContent = `Pobieranie za ${cooldown}s`;
         downloadBtn.disabled = true;
@@ -235,37 +202,37 @@
       }
     }
 
-    function startDownload() {
-      const link = document.createElement("a");
-      link.href = launcherUrl;
-      link.download = "NegroGamesLauncherSetup.exe";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
+    function runDownload() {
+      const a = document.createElement("a");
+      a.href = launcherUrl;
+      a.download = "NegroGamesLauncherSetup.exe";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
 
-    downloadBtn.addEventListener("click", () => {
+    downloadBtn.addEventListener("click", function () {
       if (cooldown > 0) {
         return;
       }
 
       statusLine.textContent = "Przygotowuje paczke instalacyjna...";
       cooldown = 3;
-      updateButtonText();
+      setButton();
 
-      timer = window.setInterval(() => {
+      timerId = window.setInterval(function () {
         cooldown -= 1;
-        updateButtonText();
+        setButton();
 
         if (cooldown <= 0) {
-          window.clearInterval(timer);
-          startDownload();
-          statusLine.innerHTML = "Pobieranie wystartowalo. Jesli nic sie nie dzieje, sprawdz czy plik istnieje pod adresem <strong>downloads/NegroGamesLauncherSetup.exe</strong>.";
+          window.clearInterval(timerId);
+          runDownload();
+          statusLine.textContent = "Pobieranie wystartowalo.";
         }
       }, 1000);
     });
 
-    updateButtonText();
+    setButton();
   </script>
 </body>
 </html>

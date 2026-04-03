@@ -1,3 +1,187 @@
+:root {
+  --bg-start: #1f232b;
+  --bg-end: #21252f;
+  --ink: #f4f5f9;
+  --muted: #7f8794;
+  --accent: #2f9bff;
+  --button: #3f495d;
+  --button-hover: #4b5670;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at 70% 42%, rgba(59, 104, 188, 0.1), transparent 38%),
+    linear-gradient(90deg, var(--bg-start) 0%, var(--bg-end) 100%);
+}
+
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-left {
+  width: 26vw;
+  height: 26vw;
+  top: -9vw;
+  left: -8vw;
+  background: #87a9d7;
+}
+
+.glow-right {
+  width: 38vw;
+  height: 38vw;
+  right: -12vw;
+  bottom: -15vw;
+  background: #2f9bff;
+}
+
+.topbar {
+  position: fixed;
+  top: 10px;
+  left: 14px;
+  z-index: 4;
+}
+
+.home-icon {
+  color: #f3f5f7;
+  text-decoration: none;
+  font-size: 12px;
+  opacity: 0.92;
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) 290px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 8rem);
+}
+
+.hero {
+  max-width: 420px;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(2.1rem, 4.1vw, 3.15rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: 0.7rem 0 1.5rem;
+  font-size: 1.01rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.download-btn {
+  border: 0;
+  border-radius: 10px;
+  background: var(--button);
+  color: #eef2f8;
+  padding: 0.72rem 1.5rem;
+  font-size: 1.04rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.download-btn:hover {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+.download-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.status {
+  margin: 0.85rem 0 0;
+  min-height: 1.4rem;
+  color: #cdd8e8;
+  font-size: 0.91rem;
+}
+
+.showcase {
+  justify-self: end;
+}
+
+.screen-art {
+  width: min(290px, 72vw);
+  aspect-ratio: 0.48;
+  border: 2px solid var(--accent);
+  border-radius: 7px;
+  box-shadow: 0 0 22px rgba(47, 155, 255, 0.4), inset 0 0 24px rgba(61, 141, 255, 0.22);
+  background:
+    radial-gradient(120% 65% at 56% 36%, rgba(232, 239, 255, 0.76) 0%, rgba(162, 185, 226, 0.42) 30%, transparent 60%),
+    radial-gradient(96% 58% at 40% 52%, rgba(78, 149, 245, 0.72) 0%, rgba(65, 127, 216, 0.63) 52%, transparent 70%),
+    radial-gradient(75% 48% at 78% 63%, rgba(66, 126, 220, 0.9) 0%, rgba(53, 107, 194, 0.8) 55%, transparent 70%),
+    linear-gradient(180deg, rgba(233, 239, 249, 0.72) 0%, rgba(57, 111, 197, 0.92) 72%, rgba(49, 103, 189, 0.98) 100%);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: rise 0.7s cubic-bezier(0.25, 0.9, 0.3, 1) forwards;
+}
+
+.reveal-1 {
+  animation-delay: 0.12s;
+}
+
+.reveal-2 {
+  animation-delay: 0.24s;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .shell {
+    width: min(620px, 92vw);
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 5rem 0 3rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .showcase {
+    justify-self: center;
+  }
+
+  .hero {
+    max-width: 560px;
+  }
+
+  .subtitle {
+    letter-spacing: 0.06em;
+  }
+}
 <!doctype html>
 <html lang="pl">
 <head>
@@ -13,41 +197,22 @@
   <div class="bg-glow glow-left"></div>
   <div class="bg-glow glow-right"></div>
 
+  <header class="topbar">
+    <a href="#" class="home-icon" aria-label="Strona glowna">⌂</a>
+  </header>
+
   <main class="shell">
     <section class="hero reveal reveal-1">
-      <p class="label">Oficjalny launcher</p>
-      <h1>Negro Games<br>Launcher</h1>
-      <p class="subtitle">
-        Jedno miejsce do instalacji, aktualizacji i uruchamiania wszystkich gier Negro Games.
-      </p>
-      <div class="cta-row">
-        <button id="downloadBtn" class="download-btn" type="button" aria-label="Pobierz launcher">
-          Pobierz dla Windows
-        </button>
-        <a class="alt-link" href="#wymagania">Wymagania systemowe</a>
-      </div>
+      <h1>ZAINSTALUJ NOWY<br>HOMELESS LAUNCHER</h1>
+      <p class="subtitle">WSZYSTKIE GRY W JEDNYM MIEJSCU</p>
+      <button id="downloadBtn" class="download-btn" type="button" aria-label="Pobierz launcher">
+        pobierz na Windows
+      </button>
       <p id="status" class="status" role="status" aria-live="polite"></p>
     </section>
 
-    <section class="card-grid">
-      <article class="card reveal reveal-2">
-        <h2>Co dostajesz</h2>
-        <ul>
-          <li>Automatyczne aktualizacje gier</li>
-          <li>Synchronizacja zapisow w chmurze</li>
-          <li>Szybkie logowanie jednym kontem</li>
-        </ul>
-      </article>
-
-      <article id="wymagania" class="card reveal reveal-3">
-        <h2>Minimalne wymagania</h2>
-        <ul>
-          <li>Windows 10 lub nowszy</li>
-          <li>4 GB RAM</li>
-          <li>1.5 GB wolnego miejsca</li>
-          <li>Stale polaczenie z internetem</li>
-        </ul>
-      </article>
+    <section class="showcase reveal reveal-2" aria-hidden="true">
+      <div class="screen-art"></div>
     </section>
   </main>
 

@@ -199,7 +199,7 @@
     const downloadBtn = document.getElementById("downloadBtn");
     const statusLine = document.getElementById("status");
 
-    const launcherUrl = "downloads/NegroGamesLauncherSetup.exe";
+    const launcherUrl = "/download-launcher";
     let cooldown = 0;
     let timerId = null;
 
@@ -238,7 +238,7 @@
         if (cooldown <= 0) {
           window.clearInterval(timerId);
           runDownload();
-          statusLine.textContent = "Pobieranie wystartowalo.";
+          statusLine.textContent = "Pobieranie wystartowalo. Jesli nic sie nie pobiera, sprawdz czy plik launchera istnieje w folderze downloads.";
         }
       }, 1000);
     });

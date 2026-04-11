@@ -202,7 +202,7 @@
     const downloadBtn = document.getElementById("downloadBtn");
     const statusLine = document.getElementById("status");
 
-    const launcherUrl = "/download-launcher";
+    const launcherUrl = "dist/NegroGamesLauncher.exe";
     let cooldown = 0;
     let timerId = null;
 
@@ -219,7 +219,7 @@
     function runDownload() {
       const a = document.createElement("a");
       a.href = launcherUrl;
-      a.download = "NegroGamesLauncherSetup.exe";
+      a.download = "NegroGamesLauncher.exe";
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -241,7 +241,7 @@
         if (cooldown <= 0) {
           window.clearInterval(timerId);
           runDownload();
-          statusLine.textContent = "Pobieranie wystartowalo. Jesli nic sie nie pobiera, sprawdz czy plik launchera istnieje w folderze downloads.";
+          statusLine.textContent = "Pobieranie wystartowalo. Instalator zapisze sie jako NegroGamesLauncher.exe.";
         }
       }, 1000);
     });

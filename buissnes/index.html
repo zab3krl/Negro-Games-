@@ -202,7 +202,11 @@
     const downloadBtn = document.getElementById("downloadBtn");
     const statusLine = document.getElementById("status");
 
-    const launcherUrl = "dist/NegroGamesLauncher.exe";
+    const launcherCandidates = [
+      "NegroGamesLauncher.exe",
+      "dist/NegroGamesLauncher.exe",
+      "downloads/NegroGamesLauncherSetup.exe"
+    ];
     let cooldown = 0;
     let timerId = null;
 
@@ -216,13 +220,36 @@
       }
     }
 
-    function runDownload() {
+    async function resolveLauncherUrl() {
+      for (const candidate of launcherCandidates) {
+        try {
+          const response = await fetch(candidate, { method: "HEAD", cache: "no-store" });
+          if (response.ok) {
+            return candidate;
+          }
+        } catch (error) {
+          // Continue trying next candidate path.
+        }
+      }
+
+      return null;
+    }
+
+    async function runDownload() {
+      const launcherUrl = await resolveLauncherUrl();
+      if (!launcherUrl) {
+        statusLine.textContent = "Nie znaleziono pliku launchera (.exe). Sprawdz czy plik jest obok index.html albo w folderze dist.";
+        return;
+      }
+
       const a = document.createElement("a");
       a.href = launcherUrl;
-      a.download = "NegroGamesLauncher.exe";
+      a.download = launcherUrl.includes("Setup") ? "NegroGamesLauncherSetup.exe" : "NegroGamesLauncher.exe";
       document.body.appendChild(a);
       a.click();
       a.remove();
+
+      statusLine.textContent = "Pobieranie wystartowalo. Jesli plik jest niepoprawny, odswiez strone Ctrl+F5.";
     }
 
     downloadBtn.addEventListener("click", function () {
@@ -241,7 +268,6 @@
         if (cooldown <= 0) {
           window.clearInterval(timerId);
           runDownload();
-          statusLine.textContent = "Pobieranie wystartowalo. Instalator zapisze sie jako NegroGamesLauncher.exe.";
         }
       }, 1000);
     });

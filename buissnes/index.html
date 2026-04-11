@@ -209,6 +209,7 @@
     ];
     let cooldown = 0;
     let timerId = null;
+    let preparingDownload = false;
 
     function setButton() {
       if (cooldown > 0) {
@@ -253,10 +254,14 @@
     }
 
     downloadBtn.addEventListener("click", function () {
-      if (cooldown > 0) {
+      if (cooldown > 0 || preparingDownload) {
+        if (preparingDownload) {
+          statusLine.textContent = "Pobieranie jest juz przygotowywane. Poczekaj chwile.";
+        }
         return;
       }
 
+      preparingDownload = true;
       statusLine.textContent = "Przygotowuje paczke instalacyjna...";
       cooldown = 3;
       setButton();
@@ -267,7 +272,17 @@
 
         if (cooldown <= 0) {
           window.clearInterval(timerId);
-          runDownload();
+          timerId = null;
+          runDownload().finally(function () {
+            preparingDownload = false;
+            cooldown = 8;
+            setButton();
+
+            window.setTimeout(function () {
+              cooldown = 0;
+              setButton();
+            }, 8000);
+          });
         }
       }, 1000);
     });
